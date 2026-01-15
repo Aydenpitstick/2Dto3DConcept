@@ -1,32 +1,35 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3p1dn84t6qtw"]
+[gd_scene load_steps=12 format=3 uid="uid://c3p1dn84t6qtw"]
 
-[ext_resource type="Texture2D" uid="uid://beyl4s61jb0np" path="res://icon.svg" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://b4chr5b5w8lnw" path="res://game.gd" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://ls7usysul2xt" path="res://3d.gd" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://c14w7glo7sjko" path="res://Y Bot.fbx" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://b47twfrgi27f8" path="res://2d.gd" id="3_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://m8rgm8w55vow" path="res://Wizard.png" id="5_7jktm"]
+[ext_resource type="Texture2D" uid="uid://c2q251mtdgsic" path="res://Screenshot 2026-01-15 123012.png" id="6_ryrav"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e2o6t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_feb5d"]
-size = Vector3(18.8847, 19.6275, 0.280273)
+size = Vector3(29.0024, 71.2794, 0.280273)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7jktm"]
 size = Vector3(1.97949, 0.0266724, 1.97668)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ryrav"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_eow3j"]
+
 [node name="Game" type="Node"]
 script = ExtResource("1_e2o6t")
 
 [node name="3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(18.8847, 0, 0, 0, 18.8847, 0, 0, 0, 18.8847, -141.186, 0, 135.482)
+transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, -61.7734, 0, 23.532)
 script = ExtResource("2_7jktm")
 
 [node name="Y Bot" parent="3D" instance=ExtResource("2_feb5d")]
 
 [node name="Cam3D" type="Camera3D" parent="3D"]
-transform = Transform3D(0.0529528, 0, 0, 0, 0.0529528, 0, 0, 0, 0.0529528, 0, 0.894301, 1.69053)
+transform = Transform3D(0.03125, 0, 0, 0, 0.0307365, 0.00564176, 0, -0.00564176, 0.0307365, 0, 1.35326, 2.23925)
 
 [node name="Sprite3D" type="Sprite3D" parent="3D"]
 
@@ -34,27 +37,42 @@ transform = Transform3D(0.0529528, 0, 0, 0, 0.0529528, 0, 0, 0, 0.0529528, 0, 0.
 shape = SubResource("BoxShape3D_e2o6t")
 
 [node name="2D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.4058, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 37.106, 0)
 script = ExtResource("3_fc0e3")
 
 [node name="Cam2D" type="Camera3D" parent="2D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20.0615)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.3269, 124.696)
 current = true
 
 [node name="Sprite3D" type="Sprite3D" parent="2D"]
 transform = Transform3D(16.0303, 0, 0, 0, 16.0303, 0, 0, 0, 1, 0, 0, 0)
-texture = ExtResource("1_80nbo")
+flip_h = true
+texture = ExtResource("5_7jktm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="2D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.748932, 0.606293, 0.034668)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.30774, 0.641529, -0.173767)
 shape = SubResource("BoxShape3D_feb5d")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(320.481, 0, 0, 0, 320.481, 0, 0, 0, 320.481, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00732423, -0.00466919, 0.003479)
 shape = SubResource("BoxShape3D_7jktm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("PlaneMesh_ryrav")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(87.3114, 0, 0, 0, 87.3114, 0, 0, 0, 87.3114, 14.5226, 207.284, -11.7218)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("BoxShape3D_eow3j")
+
+[node name="Sprite3D" type="Sprite3D" parent="Wall"]
+texture = ExtResource("6_ryrav")
+
+[connection signal="ThreeDActive" from="." to="3D" method="_on_game_three_d_active"]
+[connection signal="ThreeDActive" from="." to="2D" method="_on_game_three_d_active"]
+[connection signal="TwoDActive" from="." to="3D" method="_on_game_two_d_active"]
+[connection signal="TwoDActive" from="." to="2D" method="_on_game_two_d_active"]
