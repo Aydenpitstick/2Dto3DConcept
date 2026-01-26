@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b4chr5b5w8lnw" path="res://game.gd" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://ls7usysul2xt" path="res://3d.gd" id="2_7jktm"]
-[ext_resource type="PackedScene" uid="uid://c14w7glo7sjko" path="res://Y Bot.fbx" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://b47twfrgi27f8" path="res://2d.gd" id="3_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://rl21mcvt1kti" path="res://wizard.fbx" id="3_ryrav"]
 [ext_resource type="Texture2D" uid="uid://m8rgm8w55vow" path="res://Wizard.png" id="5_7jktm"]
 [ext_resource type="Texture2D" uid="uid://c2q251mtdgsic" path="res://Screenshot 2026-01-15 123012.png" id="6_ryrav"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e2o6t"]
+size = Vector3(0.945313, 4.29016, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_feb5d"]
 size = Vector3(29.0024, 71.2794, 0.280273)
@@ -26,7 +27,8 @@ script = ExtResource("1_e2o6t")
 transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, -61.7734, 0, 23.532)
 script = ExtResource("2_7jktm")
 
-[node name="Y Bot" parent="3D" instance=ExtResource("2_feb5d")]
+[node name="wizard" parent="3D" instance=ExtResource("3_ryrav")]
+transform = Transform3D(-3.67739e-06, 0, 84.1288, 0, 84.1288, 0, -84.1288, 0, -3.67739e-06, 0, 0, 0)
 
 [node name="Cam3D" type="Camera3D" parent="3D"]
 transform = Transform3D(0.03125, 0, 0, 0, 0.0307365, 0.00564176, 0, -0.00564176, 0.0307365, 0, 1.35326, 2.23925)
@@ -34,6 +36,7 @@ transform = Transform3D(0.03125, 0, 0, 0, 0.0307365, 0.00564176, 0, -0.00564176,
 [node name="Sprite3D" type="Sprite3D" parent="3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0273438, 1.64508, 0)
 shape = SubResource("BoxShape3D_e2o6t")
 
 [node name="2D" type="CharacterBody3D" parent="."]
